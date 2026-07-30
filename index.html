@@ -693,6 +693,13 @@ const PLAYERS = [
 ];
 
 function clubById(id){ return CLUBS.find(c=>c.id===id); }
+
+/* ---------------- AUTH setup (debe existir antes que el resto del juego) ---------------- */
+const SUPABASE_URL = 'https://wpxtkgpriopoifropxla.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndweHRrZ3ByaW9wb2lmcm9weGxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0MTcyNzIsImV4cCI6MjEwMDk5MzI3Mn0.KWsCSQfmCRod_D17NOO8p1hEumMlFiBAvx5OJIgPFeY';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let currentUser = null;
+let authMode = 'login';
 function playerById(id){ return PLAYERS.find(p=>p.id===id); }
 
 function initials(name){
@@ -1037,13 +1044,6 @@ function showToast(msg){
 }
 
 /* ---------------- AUTH (Supabase) ---------------- */
-const SUPABASE_URL = 'https://wpxtkgpriopoifropxla.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndweHRrZ3ByaW9wb2lmcm9weGxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0MTcyNzIsImV4cCI6MjEwMDk5MzI3Mn0.KWsCSQfmCRod_D17NOO8p1hEumMlFiBAvx5OJIgPFeY';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-let currentUser = null;
-let authMode = 'login';
-
 function setAuthTab(mode){
   authMode = mode;
   document.getElementById('tab-login').classList.toggle('active', mode==='login');
